@@ -8,23 +8,65 @@
 #include <iostream>
 #include "VectorInt.h"
 using namespace std;
-//PRIVATE
-void VectorInt::resize(int new_capacity) { // задает новую ёмкость для вектора
-    if(capacity() == new_capacity)
-        return;
-    else
-        if(capacity() < new_capacity)
 
-        else
+
+//PRIVATE
+void VectorInt::increaseSize(){ // увеличивает ёмкость вектора в 2 раза
+    int *buffArray = new int[capacity()];
+
+    for(int i = 0; i < capacity();i++) //копируем значение из исходного массива
+        buffArray[i] = array[i];
+
+    delete []array;  //очищаем память из под исходного массива
+    array = new int[capacity()*2]; //выделяем удвоенную память исходному массиву
+
+    for(int i = 0; i < capacity(); i++) //копируем значения из временного массива
+        array[i] = buffArray[i];
+
+    vector_capacity *= 2;
+
+    delete []buffArray;
 
     return;
 }
+
+void VectorInt::decreaseSize() { // уменьшает ёмкость вектора вдвое
+    int *buffArray = new int[size()];
+    for(int i = 0; i < size();i++) //копируем значение из исходного массива
+        buffArray[i] = array[i];
+
+    delete []array;  //очищаем память из под исходного массива
+    array = new int[capacity()/2]; //выделяем уменьшенную память исходному массиву
+    for(int i = 0; i < capacity()/2; i++) //ОБНУЛЯЕМ МАССИВ
+        array[i] = 0;
+
+    for(int i = 0; i < size(); i++) //копируем значения из временного массива
+        array[i] = buffArray[i];
+
+    vector_capacity /= 2;
+
+    delete []buffArray;
+    return;
+}
+
+void VectorInt::resise() { //решает, уменьшить или увеличить память, и делает это
+    if(size() == capacity()) {
+        increaseSize();
+        cout << "LOG изменение размера вектора: capacity = " << capacity() << endl;
+    }else
+        if(double(size())/ double(capacity()) <= decreaseFactor) {
+            decreaseSize();
+            cout << "LOG изменение размера вектора: capacity = " << capacity() << endl;
+        }
+    return;
+}
+
 
 //PUBLIC
 VectorInt::VectorInt(){
     array = new int[16];
     vector_size = 0;
-    vector_capacity = 16; // начальная ёмкость - 16 элементов
+    vector_capacity = 1; // начальная ёмкость - 1 элемент
     cout << "LOG " << "Сработал конструктор" << endl;
 }
 
@@ -52,6 +94,7 @@ int VectorInt::at(unsigned int i){ //возвращает элемент под 
 void VectorInt::push(int item){ //добавляет следующий элемент в вектор
     *(array + vector_size) = item; // присваиваем элементу значение
     vector_size++; // увеличиваем размер
+    resise();
     return;
 }
 
@@ -68,11 +111,13 @@ void VectorInt::insert(int index, int item){ //вставляет элемент
         delete [] buff_arr;
     }else
         push(item); // если массив не пуст, то просто пушим элемент
+    resise();
     return;
 }
 
 void VectorInt::prepend(int item){ //вставляет элемент в нулевой индекс
     insert(0,item);
+    resise();
     return;
 }
 
@@ -80,6 +125,7 @@ int VectorInt::pop() { //удаляет элемент из конца вект�
     int result = *(array + vector_size - 1); //сохраняем значение последнего элемента вектора
     *(array + vector_size - 1) = 0; //обнуляем его в векторе
     vector_size--;
+    resise();
     return  result;
 }
 
@@ -88,6 +134,7 @@ void VectorInt::delete_item(int index) { //удаляет элемент по у
     for(int i = index; i < vector_size-1; i++)
         *(array + i) = *(array + i + 1);
     vector_size--;
+    resise();
     return;
 }
 
@@ -99,6 +146,7 @@ void VectorInt::remove(int item) { //получает значение, удал
             i -= 1;
         }
     }
+    resise();
     return;
 }
 

@@ -10,8 +10,11 @@ private:
     unsigned int vector_size; //количество элементов
     unsigned int vector_capacity; // количество элементов, которые можно вместить.
     int *array; // под динамический массив.
+    const double decreaseFactor = 0.25;//отношение размера size к capacity, при котором произойдет уменьшение ёмкости
 
-    void resize(int new_capacity); // задает новую ёмкость для вектора
+    void increaseSize(); // увеличивает ёмкость вектора
+    void decreaseSize(); // уменьшает ёмкость вектора
+    void resise(); //решает, уменьшить или увеличить память, и делает это
 public:
     VectorInt();
 
