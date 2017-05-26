@@ -2,14 +2,14 @@
 // Created by kudry on 23.05.17.
 //
 
-#ifndef VECTOR_VECTORINT_H
-#define VECTOR_VECTORINT_H
+#ifndef VECTOR_VECTOR_H
+#define VECTOR_VECTOR_H
 
-class VectorInt{
+class Vector {
 public:
-    VectorInt();
+    Vector();
 
-    ~VectorInt();
+    ~Vector();
 
     unsigned int size(); //возвращает количество элементов в векторе
 
@@ -43,4 +43,4 @@ private:
     void resise(); //решает, уменьшить или увеличить память, и делает это
 };
 
-#endif //VECTOR_VECTORINT_H
+#endif //VECTOR_VECTOR_H
