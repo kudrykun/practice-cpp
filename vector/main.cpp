@@ -9,7 +9,7 @@ void fillVector(VectorInt &v,int quantity){
     return;
 }
 
-void printVector(VectorInt v){
+void printVector(VectorInt &v){
     cout << "START. Вывод элементов вектора : ";
     for (int i = 0; i < v.capacity(); i++)
         cout << v.at(i) << " ";
