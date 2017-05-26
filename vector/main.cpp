@@ -3,33 +3,22 @@
 
 using namespace std;
 
-int main(){
-    VectorInt vector1;
+void fillVector(VectorInt &v,int quantity){
+    for (int i = 0; i < quantity; i++)
+        v.push(i);
+    return;
+}
 
+void printVector(VectorInt v){
     cout << "START. Вывод элементов вектора : ";
-    for (int i = 0; i < vector1.capacity(); i++)
-        cout << vector1.at(i) << " ";
-    cout << "   " << "size = " << vector1.size() << " capacity = " << vector1.capacity() << endl;
+    for (int i = 0; i < v.capacity(); i++)
+        cout << v.at(i) << " ";
+    cout << "   " << "size = " << v.size() << " capacity = " << v.capacity() << endl;
+}
 
-
-    for(int i = 0; i < 15; i++) {
-        cout << "Вставка значения: value = " << i+1 << endl;
-        vector1.push(i + 1);
-        cout << "Вывод элементов вектора : ";
-        for (int j = 0; j < vector1.capacity(); j++)
-            cout << vector1.at(j) << " ";
-        cout << "   " << "size = " << vector1.size() << " capacity = " << vector1.capacity() << endl;
-    }
-
-    cout << endl << endl << "Начинаем попить элементы" << endl << endl;
-
-    for(int i = 0; i < 15; i++) {
-        cout << "Извлечение последнего элемента" << endl;
-        vector1.pop();
-        cout << "Вывод элементов вектора : ";
-        for (int j = 0; j < vector1.capacity(); j++)
-            cout << vector1.at(j) << " ";
-        cout << "   " << "size = " << vector1.size() << " capacity = " << vector1.capacity() << endl;
-    }
+int main(){
+    VectorInt vector;
+    fillVector(vector,10);
+    printVector(vector);
     return 0;
 }

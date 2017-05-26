@@ -6,15 +6,6 @@
 #define VECTOR_VECTORINT_H
 
 class VectorInt{
-private:
-    unsigned int vector_size; //количество элементов
-    unsigned int vector_capacity; // количество элементов, которые можно вместить.
-    int *array; // под динамический массив.
-    const double decreaseFactor = 0.25;//отношение размера size к capacity, при котором произойдет уменьшение ёмкости
-
-    void increaseSize(); // увеличивает ёмкость вектора
-    void decreaseSize(); // уменьшает ёмкость вектора
-    void resise(); //решает, уменьшить или увеличить память, и делает это
 public:
     VectorInt();
 
@@ -40,6 +31,16 @@ public:
     void remove(int); //получает значение, удаляет все элементы с этим значением
 
     int find(int); //получачет значение, вовзращает индекс первого элемента с этим значением
+
+private:
+    unsigned int vector_size; //количество элементов
+    unsigned int vector_capacity; // количество элементов, которые можно вместить.
+    int *array; // под динамический массив.
+    const double decreaseFactor = 0.25;//отношение размера size к capacity, при котором произойдет уменьшение ёмкости
+
+    void increaseSize(); // увеличивает ёмкость вектора
+    void decreaseSize(); // уменьшает ёмкость вектора
+    void resise(); //решает, уменьшить или увеличить память, и делает это
 };
 
 #endif //VECTOR_VECTORINT_H
