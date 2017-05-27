@@ -3,5 +3,5 @@ project(list)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp ListNode.h)
 add_executable(list ${SOURCE_FILES})
